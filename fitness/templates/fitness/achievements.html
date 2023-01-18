@@ -1,0 +1,318 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>App Achievements Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'fitness/css/everything.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'fitness/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'fitness/css/motivation.css' %}" />
+    <script type="text/javascript" src="{% static 'fitness/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'fitness/vendor/paper/paper-full.min.js' %}"></script>
+
+    <style>
+        table, td {
+          margin-top: 25px;
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+        td {
+          padding: 15px;
+        }
+        .text-block-1 {
+            margin: auto;
+            width: 50%;
+            text-align: center;
+            font-size: 250%;
+            padding: 35px;
+        }
+        .space {
+            margin-top: 25px;
+        }
+
+        .tableStyle {
+            width: 60%;
+            margin-left: 20%;
+        }
+
+        .descriptionPosition {
+            text-align: center;
+            font-size: 35px;
+        }
+
+        .checkWidth {
+            width: 10%;
+        }
+
+         .goalText {
+            font-size: 3vw;
+        }
+
+        
+        </style>
+</head>
+
+<body>
+      
+        <div style = "background-color: #48A2E9;"> 
+        <i class="bi bi-arrow-left" onclick="goBack()" style="font-size:4em; margin-left:5%; font-weight:bold;"></i>
+        <div class="text-block-1"> <h1>App Achievements</h1></div>
+        </div>
+        <br><br>
+
+        <div>
+
+            <p class="descriptionPosition"> App Use </p>
+            <table class="tableStyle">
+                <tr>
+                    <td id="one" class="checkWidth"></td>
+                    <td class='goalText'>Started the App</td>
+                </tr>
+
+                <tr>
+                    <td id="two" class="checkWidth"></td>
+                    <td class='goalText'>Looked at the about page</td>
+                </tr>
+
+                <tr>
+                    <td id="three" class="checkWidth"></td>
+                    <td class='goalText'>Looked at My Scheduale</td>
+                </tr>
+
+                <tr>
+                    <td id="four" class="checkWidth"></td>
+                    <td class='goalText'>Looked at My Progress page</td>
+                </tr>
+
+                <tr>
+                    <td id="five" class="checkWidth"></td>
+                    <td class='goalText'>Looked at My Exercises page</td>
+                </tr>         
+
+                <tr>
+                    <td id="six" class="checkWidth"></td>
+                    <td class='goalText'>Looked at My Goals Page</td>
+                </tr>
+
+
+            </table>
+            <br>
+
+            <p class="descriptionPosition"> Goals </p>
+            <table class="tableStyle">
+                <tr>
+
+                <tr>
+                    <td id="seven" class="checkWidth"></td>
+                    <td class='goalText'>Finished 1 Goal</td>
+                </tr>
+                
+                <tr>
+                    <td id="eight" class="checkWidth"></td>
+                    <td class='goalText'>Finished 5 Goals</td>
+                </tr>
+
+                <tr>
+                    <td id="nine" class="checkWidth"></td>
+                    <td class='goalText'>Finished 10 Goals</td>
+                </tr>
+
+                <tr>
+                    <td id="ten" class="checkWidth"></td>
+                    <td class='goalText'>Finished 15 Goals</td>
+                </tr>
+
+                <tr>
+                    <td id="eleven" class="checkWidth"></td>
+                    <td class='goalText'>Finished 20 Goals</td>
+                </tr>
+
+            </table>
+            <br>
+
+
+
+
+            <p class="descriptionPosition"> My Calendar </p>
+            <table class="tableStyle">
+
+                <tr>
+                    <td id="twelve" class="checkWidth"></td>
+                    <td class='goalText'>Added more than 60 minutes of exercise</td>
+                </tr>
+
+                <tr>
+                    <td id="thirteen" class="checkWidth"></td>
+                    <td class='goalText'>Added more than 120 minutes of exercise</td>
+                </tr>
+
+                <tr>
+                    <td id="fourteen" class="checkWidth"></td>
+                    <td class='goalText'>Added more than 210 minutes of exercise</td>
+                </tr>
+
+                <tr>
+                    <td id="fifteen" class="checkWidth"></td>
+                    <td class='goalText'>Added more than 500 minutes of exercise</td>
+                </tr>
+
+                <tr>
+                    <td id="sixteen" class="checkWidth"></td>
+                    <td class='goalText'>Added more than 1000 minutes of exercise</td>
+                </tr>
+
+                <tr>
+                    <td id="seventeen" class="checkWidth"></td>
+                    <td class='goalText'>Manually chose a workout once</td>
+                </tr>
+                <tr>
+                    <td id="eightteen" class="checkWidth"></td>
+                    <td class='goalText'>Automatically choose a workout once</td>
+                </tr>
+
+                <tr>
+                    <td id="nineteen" class="checkWidth"></td>
+                    <td class='goalText'>Have more exercise hours than leisure hours</td>
+                </tr>
+
+
+            </table>
+
+        </div>
+
+</body>
+
+
+
+
+<script>
+
+    // This function is to be called on when we want to checkmark a achievement
+    // BoxNum would be an input corresoponding to the box number, for example "#ten"
+    // inputNum would be something like "tenCheck"
+    function checkMarking(boxNum, inputNum) {
+        var inputCheck = document.getElementById(inputNum);
+        if (inputCheck === null) {
+            $(boxNum).append("<i class='bi bi-check-lg' id='" + inputNum + "' style='color:green';> </i>");
+        }
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+
+
+
+    function init() {
+        // tracker.index == tracker['index']
+        let tracker = JSON.parse(localStorage.getItem('userTracker'));
+        let goalCount = JSON.parse(localStorage.getItem('goalNum'));
+        let calTracker = JSON.parse(localStorage.getItem('userHours'));
+        let manExercise = localStorage.getItem('manExercise');
+        let autoExercise = localStorage.getItem('autoExercise');
+        let moreExercise = localStorage.getItem('moreExercise');
+        
+        let totalEXP = 0;
+
+
+        checkMarking("#one", "oneCheck");
+        
+        if (tracker !== null) {
+            if (tracker['index']) {
+                checkMarking("#two", "twoCheck");
+                totalEXP++;
+            }
+            if (tracker['calendar']) {
+                checkMarking("#three", "threeCheck");
+                totalEXP++;
+            }
+            if (tracker['progress']) {
+                checkMarking("#four", "fourCheck");
+                totalEXP++;
+            }
+            if (tracker['about']) {
+                checkMarking("#five", "fiveCheck");
+                totalEXP++;
+            }
+            if (tracker['muscle_group']) {
+                checkMarking("#six", "sixCheck");
+                totalEXP++;
+            }
+        }
+
+        if (goalCount !== null) {
+            if (goalCount > 0) {
+                checkMarking("#seven", "sevenCheck");
+                totalEXP++;
+            }
+            if (goalCount > 4) {
+                checkMarking("#eight", "eightCheck");
+                totalEXP++;
+            }
+            if (goalCount > 9) {
+                checkMarking("#nine", "nineCheck");
+                totalEXP++;
+            }
+            if (goalCount > 14) {
+                checkMarking("#ten", "tenCheck");
+                totalEXP++;
+            }
+            if (goalCount > 19) {
+                checkMarking("#eleven", "elevenCheck");
+                totalEXP++;
+            }
+            totalEXP += goalCount
+        }
+
+        if (calTracker !== null) {
+            // check calendar goals here
+            if (calTracker.exerciseTime > 60) {
+                checkMarking("#twelve", "twelveCheck");
+                totalEXP++;
+            }
+            if (calTracker.exerciseTime > 120) {
+                checkMarking("#thirteen", "thirteenCheck");
+                totalEXP++;
+            }
+            if (calTracker.exerciseTime > 210) {
+                checkMarking("#fourteen", "fourteenCheck");
+                totalEXP++;
+            }
+            if (calTracker.exerciseTime > 500) {
+                checkMarking("#fifteen", "fifteenCheck");
+                totalEXP++;
+            }  
+            if (calTracker.exerciseTime > 1000) {
+                checkMarking("#sixteen", "sixteenCheck");
+                totalEXP++;
+            }    
+        }
+
+        if (manExercise !== null) {
+            // don't need if statement for this
+            checkMarking("#seventeen", "seventeenCheck");
+            totalEXP++;
+        }
+        if (autoExercise !== null) {
+            // don't need if statement for this
+            checkMarking("#eightteen", "eightteenCheck");
+            totalEXP++;
+        }
+        if (moreExercise !== null) {
+            // don't need if statement for this
+            checkMarking("#nineteen", "nineteenCheck");
+            totalEXP++;
+        }
+
+        localStorage.setItem('userEXP', JSON.stringify(totalEXP));
+
+    }
+
+    init();
+
+
+</script>
+</html>

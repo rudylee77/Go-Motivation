@@ -1,0 +1,122 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Muscle Group Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'fitness/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'fitness/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'fitness/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'fitness/css/everything.css' %}" />
+</head>
+<style>
+h1 {
+  text-align : center;
+ 
+}
+h5 {
+  text-align : center;
+  font-size : 2em;
+   padding-bottom:35px 
+}
+.images{
+  max-width: 100%;
+  height: auto;
+}
+.tables{
+  text-align : center;
+}
+table{
+  border-collapse: separate;
+  border-spacing: 0 60px;
+  text-align:center;
+}
+td{
+  border : 1px solid black;
+}
+.tr-rows{
+  height : 392.25px;
+}
+.section{
+  font-size : 2em;
+  font-weight : bold;
+}
+
+
+.footer {
+  border-top: 1px solid black;
+}
+
+#footer-table{
+
+  border-spacing: 0 32px;
+}
+</style>
+<body>
+  <div style="background-color: #48A2E9;">
+    <i class="bi bi-arrow-left" onclick="goBack()" style="font-size:4em; margin-left:2%; font-weight:bold;"></i>
+    <h1>Muscle Groups </h1>
+    <h5>Click on a section to see specific exercises!</h5>
+  </div>
+    <div class = "my-container">
+      
+      <div class =" col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class ="tables" style = "padding: 0px 4%">
+  				<table align="center"width="100%" border="0" style=" margin-top:2%">
+  	         <tr class= "tr-rows">
+
+                  <td width="45%" onclick="location.href='/fitness/catalog-exercise-arms/';"><p class = "section" >Arms</p><img class ="images" src="../../static/fitness/images/arms.png"></td>
+                  <td style = "border: transparent;" width = "10%"></td>
+                  <td width="45%" onclick="location.href='/fitness/catalog-exercise-legs/';"><p class = "section">Legs</p><img class ="images" src="../../static/fitness/images/legs.png"></td>
+  	         </tr>
+             <tr class="tr-rows">
+                  <td width="45%" onclick="location.href='/fitness/catalog-exercise-abs/';"><p class = "section">Abs</p><img class ="images" src="../../static/fitness/images/absnew.png" ></td>
+                  <td style = "border: transparent;" width = "10%"></td>
+                  <td width="45%" onclick="location.href='/fitness/catalog-exercise-shoulders/';"><p class = "section">Shoulders</p><img class ="images" src="../../static/fitness/images/shoulders.png"></td>
+  	         </tr>
+             <tr class ="tr-rows">
+                  <td width="45%" onclick="location.href='/fitness/catalog-exercise-back/';"><p class = "section">Back</p><img class ="images" src="../../static/fitness/images/back.png" ></td>
+                  <td style = "border: transparent;" width = "10%"></td>
+                  <td width="45%" onclick="location.href='/fitness/catalog-exercise-chest/';" ><p class = "section">Chest</p><img class ="images" src="../../static/fitness/images/chest.png"></td>
+  	         </tr>
+  	  	 </table>
+      </div>
+      </div>
+      </div>
+<br><br>
+
+</body>
+<script>
+function goBack() {
+  window.history.back();
+}
+
+
+
+function init() {
+        // test by writing this in console: console.log(localStorage.getItem('userTracker’));
+        if (localStorage.getItem('userTracker') === null) {
+            // pages that user opened
+            var userTracker = {
+                index: false,
+                calendar: false,
+                goal: false,
+                about: false, 
+                muscle_group: true, 
+                progress: false
+
+            };
+            localStorage.setItem('userTracker', JSON.stringify(userTracker));
+        } else {
+            let tracker = JSON.parse(localStorage.getItem('userTracker'));
+            tracker['muscle_group'] = true;
+            localStorage.setItem('userTracker', JSON.stringify(tracker));
+        }
+    }
+
+  init();
+
+</script>
+</html>

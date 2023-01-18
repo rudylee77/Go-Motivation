@@ -1,0 +1,57 @@
+/* CSS file for calendar */
+
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.container-fluid {
+    width: 95%;
+    height: 90%;
+    padding-top: 2%;
+}
+
+#calendar {
+    height: 50%;
+}
+
+#calendar-form {
+    padding: 2%;
+    margin: auto;
+}
+
+#delete-mode {
+    padding: 2%;
+    color: red;
+}
+
+#workout-fill {
+    padding: 2%;
+    margin: auto;
+}
+
+#suggestions {
+    padding-left: 10%;
+    padding-right: 10%;
+    text-indent: 1%;
+    text-align: center;
+    font-size: 2vw;
+}
+
+form {
+    text-align: center;
+}
+
+.center-button {
+    text-align: center;
+    margin: 0 auto;
+}
+
+#summary-schedule {
+    padding-top: 1%;
+}
+
+#suggTitle {
+    padding-top: 1%; 
+}

@@ -1,0 +1,330 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <title>My Progress</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'fitness/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'fitness/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'fitness/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'fitness/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'fitness/vendor/paper/paper-full.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'fitness/css/everything.css' %}" />
+
+
+    <style type="text/css">
+        html,
+        body {
+            padding: 0;
+            font-family: 'Comic Neue', cursive;
+        }
+
+        #border {
+            border-style: solid;
+            /* margin-left: 10px; */
+        }
+
+        .buffer {
+            margin-top: 20px;
+        }
+
+        i.bi {
+            font-size: 8rem;
+        }
+
+        .quotePosition {
+            border: 30px inset;
+            text-align: center;
+            /* margin-top:  15%; */
+            margin-left: 7%;
+            margin-right: 7%;
+            padding: 50px;
+            font-size: 50px;
+        }
+
+        #refresh1Position {
+            font-size: 50px;
+            margin-left: 89%;
+        }
+
+        .expBarFill {
+            outline-style: solid;
+            outline-color: black;
+            text-align: center;
+        }
+
+        .backgroundGreen {
+            background: green;
+        }
+
+        .bar1, .bar2, .bar3 {
+
+        }
+
+        .circle {
+            border: 20px inset;
+            background-color: #FFFFFF;
+            height: 100px;
+            border-radius:50%;
+            width: 100px;
+        }
+
+        #progressHolder {
+            text-align: center;
+            border: 15px outset;
+            width: 700px;
+            height: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+    </style>
+</head>
+
+
+
+
+
+<body>
+
+    <div style= "background-color: #48A2E9;">
+    <i class="bi bi-arrow-left" onclick="goBack()" style="font-size:4em; margin-left:5%; font-weight:bold;"></i>
+    <h1 style="text-align: center; padding: 41px"> My Progress </h1>
+    </div>
+
+    <br><br><br>
+    <i class="bi bi-person circle" id='person1' style="margin-left: 40%"></i>
+    <br><br>
+        <div class="container">
+      <div class="row">
+        <div class="col expBarFill bar1">
+          <br>
+        </div>
+        <div class="col expBarFill bar2">
+          
+        </div>
+        <div class="col expBarFill bar3">
+           
+        </div>
+      </div>
+    </div>
+    <br>
+    <h3 id="level" class="buffer" style="text-align: center; font-size: 50px">  </h3>
+    <h3 id="status" class="buffer" style="text-align: center; font-size: 50px">  </h3>
+
+    <h5 id="exp" class="buffer" style="text-align: center;">  </h5>
+
+
+    <br><br>
+
+
+
+    <div id='progressHolder' style="font-size: 50px;">
+    Time Use Summary <br>
+        <div id='exercise' style="font-size: 40px;"> </div>
+        <div id='work' style="font-size: 40px;"> </div>
+        <div id='leisure' style="font-size: 40px;"> </div>
+        <div id='other' style="font-size: 40px;"> </div>
+    </div>
+
+
+    <br><br><br><br>
+
+    <div id='quoteHolder'>
+
+    </div>
+    <br><br>
+    <button type="button" onclick="resetProgress();"> Reset Progress</button>
+</body>
+
+
+
+
+<script>
+
+
+
+    function goBack() {
+      window.history.back();
+    }
+
+
+    var myQuotes = ["'A journey of a thousand miles begins with a single step.'",
+        "'Success is most often achieved by those who don't know that failure is inevitable'",
+         "'Relax, and take a deep breathe.'",
+         "'If you feel that you are too busy, take the time look at your scheduale.'",
+         "'You're doing fantasic!'",
+         "'Stress is a sign that you care.'",
+         "'Sometimes it's good to take a day off.'",
+         "'If you feel like exercising, feel free to reflect on your progress.'",
+         "'Time not spent is time wasted.'",
+         "'A balanced scheduale is a balanced life.'",
+         "'Goals are to be achieved through hard work.'",
+         "'Start where you are. Use what you have. Do what you can'",
+         "'I find that the harder I work, the more luck I seem to have' <br> ",
+         "'Success is the sum of small efforts, repeated day-in and day-out' <br>",
+         "'All progress takes place outside the comfort zone' <br> ",
+         "'Even the best of the best had to start somewhere.'",
+         "'If you can, cut off some leisure time for exercise.'",
+         "'Great job, i'm proud of you!",
+         "'I avoid looking forward or backward, and try to keep looking upward' ",
+         "'In my experience, there is only one motivation, and that is desire. No reasons or principle contain it or stand against it'",
+         "'Be patient with yourself. Self-growth is tender; it's holy ground. There's no greater investment' ",
+         "'Many of life's failures are people who did not realize how close they were to success when they gave up'",
+         "'If you do what you’ve always done, you’ll get what you’ve always gotten' ",
+         "'Don’t judge each day by the harvest you reap but by the seeds that you plant.'",
+         "'If you always put limit on everything you do, it will spread into your work and into your life'",
+         "'Pain is temporary. Quitting lasts forever'"];
+
+
+
+    var quoteSelect = myQuotes[Math.floor(Math.random() * myQuotes.length)];
+
+    function quoteAppend() {
+        var existingQuote = $(".quotePosition");
+        if (existingQuote != null) {
+            existingQuote.remove();
+        }
+
+        var theQuote = document.getElementById("quoteHolder");
+        var randomQuote = myQuotes[Math.floor(Math.random() * myQuotes.length)];
+        $("#quoteHolder").append("<p class=quotePosition id='quo'>" + randomQuote + "</p>");
+    }
+
+
+    function expFilling(points) {
+        let bar1 = $(".bar1");
+        let bar2 = $(".bar2");
+        let bar3 = $(".bar3");
+        let barClass1 = bar1.classList;
+        let barClass2 = bar2.classList;
+        let barClass3 = bar3.classList;
+
+        if (points === 0) {
+            return;
+        }
+        if (points === 1) {
+            $(".bar1").addClass("backgroundGreen");
+        }
+        if (points === 2) {
+            $(".bar1").addClass("backgroundGreen");
+            $(".bar2").addClass("backgroundGreen");
+        }
+        if (points === 3) {
+            console.log("levelup");
+        }
+
+    }
+
+
+    function nameRank(number) {
+        let names = ['Beginner', 'Novice', 'Intermediate',
+        'Seasoned', 'Experienced', 'Professional', 'Advanced', 'Champion']
+        if (number < 10) {
+            return names[number];
+        } else {
+            return 'Master';
+        }
+    }
+
+    function borderCol(level) {
+        let colors = ['black', 'DarkBlue', 'Crimson', 'DarkGreen', 'DodgerBlue', 'ForestGreen','indigo', 'RoyalBlue', 'DarkGoldenRod' ]
+        if (level < 10) {
+            return colors[level];
+        } else {
+            return 'gold';
+        }
+    }
+
+    function appendColors(level) {
+        let mycolor = borderCol(level);
+        document.getElementById("quo").style.borderColor = mycolor;
+        document.getElementById("person1").style.borderColor = mycolor;
+        document.getElementById("progressHolder").style.borderColor = mycolor;
+    }
+
+    function resetProgress() {
+        let msg = prompt('Please type "progress reset" below to reset everything.');
+        if (msg === "progress reset") {
+            alert("Your progress was reset.")
+            localStorage.clear();
+            location.href='/fitness/';
+        } else if (msg === null){
+            return;
+        } else {
+            alert('Your progress was not reset because you inputted the wrong phrase.');
+        }
+        
+    }
+
+    function init() {
+        quoteAppend();
+
+        if (localStorage.getItem('userTracker') === null) {
+            // pages that user opened
+            var userTracker = {
+                index: false,
+                calendar: false,
+                goal: false,
+                about: false, 
+                muscle_group: false, 
+                progress: true
+
+            };
+            localStorage.setItem('userTracker', JSON.stringify(userTracker));
+        } else {
+            let tracker = JSON.parse(localStorage.getItem('userTracker'));
+            tracker['progress'] = true;
+            localStorage.setItem('userTracker', JSON.stringify(tracker));
+        }
+
+
+        var myEXP = JSON.parse(localStorage.getItem('userEXP'));
+        if (myEXP === null) {
+            myEXP = 0;
+        } 
+
+        myLevel = Math.floor(myEXP / 3) + 1; 
+
+        // console.log(myEXP);
+        console.log(myLevel);
+        console.log(myEXP);
+        // (myLevel + 1) * 3 - myExp
+            $("#level").append("Level " + myLevel);
+            $("#status").append(nameRank(myLevel));
+
+            let expLeft = 3 - (myEXP - (Math.floor(myEXP / 3) * 3));
+            if (expLeft === 0 ) {
+                expLeft = 3;
+            }
+            appendColors(myLevel);
+            expFilling(expLeft);
+
+
+        let calTracker = JSON.parse(localStorage.getItem('userHours'));
+        if (calTracker != null) {
+            $('#exercise').append("Total <b>exercise</b> time: <b>" + calTracker.exerciseTime + " minutes </b>");
+            $('#work').append("Total <b>work</b> time: <b>" + calTracker.workTime + " minutes </b>");
+            $('#leisure').append("Total <b>leisure</b> time: <b>" + calTracker.leisureTime + " minutes </b>");
+            $('#other').append("Total <b>other</b> time: <b>" + calTracker.otherTime + " minutes </b>");
+
+        }
+    }
+
+    init();
+
+
+</script>
+
+</html>

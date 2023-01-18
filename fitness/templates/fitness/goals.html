@@ -1,0 +1,373 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>About Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'fitness/css/everything.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'fitness/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'fitness/css/about.css' %}" />
+    <script type="text/javascript" src="{% static 'fitness/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'fitness/vendor/paper/paper-full.min.js' %}"></script>
+
+
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        table, td {
+          margin-top: 25px;
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+
+        td {
+          padding: 15px;
+        }
+
+        .text-block-1 {
+            margin: auto;
+            width: 50%;
+            text-align: center;
+            font-size: 50px;
+        }
+
+        .space {
+            margin-top: 25px;
+        }
+
+        .add {
+            text-align: center;
+            font-size: 50px;
+            margin-left: 47%;
+        }
+
+        .progress {
+         
+            bottom: 20px;
+            left: 20px;
+            font-size: 40px;
+            border-style: solid;
+
+            height: 150px;
+            width: 100%;
+            
+            border-color: MediumPurple;
+            background-color: Lavender;
+        }
+
+        .achievements {
+          
+            bottom: 20px;
+            right: 20px;
+            font-size: 40px;
+            border-style: solid;
+        
+            height: 150px;
+            width: 100%;
+            padding-right: 50px;
+            border-color: Khaki;
+            background-color: LemonChiffon;
+        }
+
+        .tableStyle {
+            width: 60%;
+            margin-left: 20%;
+        }
+
+        .goalText {
+            font-size: 3vw;
+        }
+
+        .numWidth {
+            width: 10%;
+        }
+
+        .crossSize {
+            font-size: 40px;
+        }
+
+
+        #background-form5 {
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            width: 70%;
+            height: 230px;
+            outline: 30px;
+            outline-width: thick;
+            outline-style: outset;
+            outline-color: goldenrod;
+            background-color: whitesmoke;
+            text-align: center;
+            margin-bottom: 5%;
+        }
+
+        .mytxt {
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            margin-top: 3%;
+        }
+
+        #locForm {
+
+        }
+
+        #areaChoose {
+            font-weight: bold;
+            font-size: 5vw;
+        }
+
+        #myform {
+
+        }
+
+        .boxSize {
+            font-size: 4vw;
+            font-family: Arial, Helvetica, sans-serif;
+            width: 50%;
+            height: 60%;
+            padding-top: 4%;
+        } 
+        .bborder {
+            border-style: solid; 
+            border-radius: 10%;
+            /* margin-left: 10px; */
+        }
+
+        .uwu1 {
+            border-color:purple;
+        }
+        .uwu2 {
+            border-color:green;
+        }
+
+
+        </style>
+</head>
+
+<body class ="body">
+    <div style = "background-color: #48A2E9; padding-bottom: 44px; width: 100%;">
+        <i class="bi bi-arrow-left" onclick="goBack()" style="font-size:4em; margin-left:5%; font-weight:bold;"></i>
+        <div class="text-block-1" style = "padding-top: 30px"> <h1>My Goals</h1></div>
+    </div>
+    <br><br>
+
+
+    <!-- FORM FOR SUBMITTING A GOAL -->
+    <div id="phForm">
+        <div id="background-form5"> 
+            <form class='mytxt' name='areaform' id="locForm">
+                <label for='myform' id='areaChoose'>Add a goal!</label>
+
+                <br><br>
+
+                <input type='textarea' id='myform' value=''>
+                    <input type='submit' onclick='submitGoal(); return false;'> </input>
+                    <button type='button' onclick='cancelGoal(); return false;'> Cancel</button>
+                </input>
+            </form>
+        </div>
+    </div>
+
+    <div id="tableHolder">
+        <p class="h1 text-center">Current Goals</p>
+        <table class='tableStyle'>
+
+        </table>
+    </div>
+
+
+    <br><br>
+
+    <div id="phCircle">
+        <i class="bi bi-plus-circle-fill add" onclick='clickGoal();'> </i>
+    </div>
+
+    <br><br><br><br><br><br>
+    <div class = "container"> 
+        <div class = "row"> 
+            <div class="col-sm-5 boxSize bborder uwu1" onclick="location.href='/fitness/goal-progress-archive/';" style="cursor: pointer;"> <div style="text-align: center"> 
+                <p>Goals Archive</p><i class="bi bi-folder" style="color:purple; font-size: 7vw;"></i></div></div>
+            <div class="col-sm-2"> </div>
+            <div class="col-sm-5 boxSize bborder uwu2" onclick="location.href='/fitness/achievements/';" style="cursor: pointer;"> <div style="text-align: center">
+                <p>Achievements</p><i class="bi bi-gem" style="color:green; font-size: 7vw;"></i>
+            </div> </div>
+        </div>
+    </div>
+</body>
+
+
+<script>
+
+    // Hides everything else and pops up the form
+    function clickGoal() {
+        $("#tableHolder").show();
+        $("#phCircle").hide();
+        $("#phProgress").hide();
+        $("#phAchievements").hide();
+        $("#phForm").show();
+        $('#progress').hide();
+        $('#achievements').hide();
+    }
+
+
+    function removeGoal(el) {
+        var goalText = el.closest(".tableStyle").rows[0].cells[0].textContent;
+
+        var goalStorage = localStorage.getItem("theGoalsList");
+        var goalSt = JSON.parse(goalStorage);
+
+        if (goalSt != null) {
+            console.log(goalSt);
+            var myindexer = goalSt.indexOf(goalText);
+            if (myindexer > -1) {
+                goalSt.splice(myindexer, 1);
+            }
+        }
+
+        localStorage.setItem("theGoalsList", JSON.stringify(goalSt));
+
+        el.parentNode.parentNode.remove();
+
+    }
+
+    // Make sure your goal text is the very top <td>, else this fails
+    function archiveGoal(el) {
+        var goalText = el.closest(".tableStyle").rows[0].cells[0].textContent;
+
+        var goalStorage = localStorage.getItem("myGoalText");
+        console.log(goalStorage);
+
+        // if we did not submit ANY goal at all
+        if (goalStorage === null) {
+            var goalArray = [];
+            goalArray.push(goalText);
+            localStorage.setItem("myGoalText", JSON.stringify(goalArray));
+
+        // if we have previous goals submitted already
+        } else {
+            var store = JSON.parse(goalStorage);
+            store.push(goalText);
+            localStorage.setItem("myGoalText", JSON.stringify(store));
+        }
+
+        removeGoal(el);
+
+
+        // Tracks goal
+        if (localStorage.getItem('goalNum') === null) {
+            var goalNum = 0;
+            goalNum = goalNum + 1;
+            localStorage.setItem('goalNum', JSON.stringify(goalNum));
+        } else {
+            let goalNum = JSON.parse(localStorage.getItem('goalNum'));
+            goalNum = goalNum + 1;
+            localStorage.setItem('goalNum', JSON.stringify(goalNum));
+        }
+
+
+    }
+
+
+    function submitGoal() {
+        var myGoal = document.areaform.myform.value;
+
+        $("#tableHolder").append("<table class='tableStyle'> <tr> <td class='goalText'>" + myGoal + "</td> <td class='numWidth'> <i class='bi bi-x crossSize' onclick='removeGoal(this);' style ='color:red';> </i> </td> <td class='numWidth'> <i class='bi bi-check-lg' style='color:green'; onclick='archiveGoal(this)'> </i> </td> </tr></table>");
+
+
+        let myGoalsList = localStorage.getItem('theGoalsList');
+        if (myGoalsList === null) {
+            // pages that user opened
+            myGoalsList = [];
+            myGoalsList.push(myGoal);
+            localStorage.setItem('theGoalsList', JSON.stringify(myGoalsList));
+        } else {
+            let tracker = JSON.parse(localStorage.getItem('theGoalsList'));
+            tracker.push(myGoal);
+            localStorage.setItem('theGoalsList', JSON.stringify(tracker));
+        }
+
+        $("#phForm").hide();
+        $("#tableHolder").show();
+        $("#phCircle").show();
+        $("#phProgress").show();
+        $("#phAchievements").show();
+        $('#progress').show();
+        $('#achievements').show();
+        document.areaform.myform.value ="";
+    }
+
+    function cancelGoal() {
+        $("#phForm").hide();
+        $("#tableHolder").show();
+        $("#phCircle").show();
+        $("#phProgress").show();
+        $("#phAchievements").show();
+        $('#progress').show();
+        $('#achievements').show();
+    }
+
+
+
+
+    function goBack() {
+      window.history.back();
+    }
+
+    function init() {
+        $("#phForm").hide();
+        // test by writing this in console: console.log(localStorage.getItem('userTracker’));
+        if (localStorage.getItem('userTracker') === null) {
+            // pages that user opened
+            var userTracker = {
+                index: false,
+                calendar: false,
+                goal: true,
+                about: false, 
+                muscle_group: false, 
+                progress: false
+
+            };
+            localStorage.setItem('userTracker', JSON.stringify(userTracker));
+        } else {
+            let tracker = JSON.parse(localStorage.getItem('userTracker'));
+            tracker['index'] = true;
+            localStorage.setItem('userTracker', JSON.stringify(tracker));
+        }
+
+
+        let myGoalsList = localStorage.getItem('theGoalsList');
+        var storer = JSON.parse(myGoalsList);
+        console.log(storer);
+        if (storer === null) {
+            return;
+        } else {
+            console.log(storer.length);
+            for (let i = 0; i < storer.length; i++) {
+                console.log("aaaa");
+                $("#tableHolder").append("<table class='tableStyle'> <tr> <td class='goalText'>" + storer[i] + "</td> <td class='numWidth'> <i class='bi bi-x crossSize' onclick='removeGoal(this);' style ='color:red';> </i> </td> <td class='numWidth'> <i class='bi bi-check-lg' style='color:green'; onclick='archiveGoal(this)'> </i> </td> </tr></table>");
+            }
+        }
+
+
+
+
+    }
+
+
+    init();
+
+</script>
+
+</html>
